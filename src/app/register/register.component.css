@@ -1,0 +1,56 @@
+.cardcontainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row-reverse;
+    background-image: url("../../assets/login_background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.cardcontainer .cardobj {
+    background-color: #A0C3DE;
+    height: 100vh;
+    max-height: 100vh;
+    width: 25%;
+    opacity: 0.8;
+}
+
+.cardcontainer .cardobj .cardbody {
+    max-height: inherit;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.cardcontainer .cardobj .cardbody img {
+    width: 70%;
+    height: auto;
+    max-height: 35%;
+}
+
+.cardcontainer .cardobj .cardbody form {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.cardcontainer .cardobj .cardbody form .formelem {
+    margin-bottom: 3%;
+}
+
+.cardcontainer .cardobj .cardbody form .formelem:last-of-type {
+    margin-bottom: 10%;
+}
+
+.cardcontainer .cardobj .cardbody form .formelem label {
+    margin: 0;
+    color: white;
+}

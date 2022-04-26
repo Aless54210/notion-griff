@@ -1,3 +1,12 @@
-p {
-  font-family: Lato;
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+}
+
+.not-auth {
+  display: none;
+}
+
+.auth {
+  display: block;
 }

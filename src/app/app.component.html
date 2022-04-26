@@ -1,3 +1,2 @@
-<hello name="{{ name }}"></hello>
-<toto name="ohla"></toto>
-<p>Start editing to see some magic happen :)</p>
+<app-sidenav (onToggleSideNav)="onToggleSideNav($event)" [ngClass]="getClass()"></app-sidenav>
+<app-body [collapsed]="isSideNavCollapsed" [screenWidth]="screenWidth"></app-body>
