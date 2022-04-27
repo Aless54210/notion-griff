@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 interface UserT {
@@ -7,17 +7,17 @@ interface UserT {
     password: string;
     accessToken: string;
     refreshToken: string;
-}
+};
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-    user: UserT = null;
+    user: UserT;
     authenticated = false;
 
     constructor() { }
 
     public async loadUser() {
-        const userRes = await fetch(`${window.location.origin}/user}`, {
+        const userRes = await fetch(`http://localhost:8080/api/user`, {
             headers: { 'Authorization': `Bearer ${localStorage.getItem("accessToken")}` }
         });
         if (!userRes.ok)

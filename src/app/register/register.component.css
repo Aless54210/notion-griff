@@ -6,7 +6,7 @@
     height: 100vh;
     display: flex;
     flex-direction: row-reverse;
-    background-image: url("../../assets/login_background.jpg");
+    background-image: url("../../assets/background.jpg");
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -16,7 +16,7 @@
     height: 100vh;
     max-height: 100vh;
     width: 25%;
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 .cardcontainer .cardobj .cardbody {
@@ -31,7 +31,10 @@
 .cardcontainer .cardobj .cardbody img {
     width: 70%;
     height: auto;
-    max-height: 35%;
+    min-height: 35%;
+    max-height: 40%;
+    padding-top: 10%;
+    text-align: center;
 }
 
 .cardcontainer .cardobj .cardbody form {
@@ -40,9 +43,12 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    height: 100%;
 }
 
 .cardcontainer .cardobj .cardbody form .formelem {
+    display: flex;
+    flex-direction: column;
     margin-bottom: 3%;
 }
 
@@ -53,4 +59,11 @@
 .cardcontainer .cardobj .cardbody form .formelem label {
     margin: 0;
     color: white;
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 0.1rem;
+}
+
+.cardcontainer .cardobj .cardbody form .formelem .formcontrol {
+    padding: 0.3rem;
 }

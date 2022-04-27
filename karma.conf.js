@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/SafetyWeb'),
+      dir: require('path').join(__dirname, './coverage/notion-griff'),
       subdir: '.',
       reporters: [
         { type: 'html' },

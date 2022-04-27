@@ -1,10 +1,25 @@
-# SafetyWeb
+# Launch the frontend separately from backend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.0.
+- npm run front
 
-## Development server
+The frontend is on the url: http://localhost:8081
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# Launch backend
+
+- npm start
+
+The api call is made on the url: http://localhost:8080/api
+
+The first time call backend will create the database with mysql with env params:
+DB_HOST
+DB_PASSWORD
+DB_USER
+DB_NAME
+DB_PORT
+
+Actually the db is created on first call but not the tables with sequelize.
+So we have to create firstly the db (manually or launch the backend, stop and relaunch it).
+
 
 ## Code scaffolding
 
@@ -12,7 +27,7 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
 ## Running unit tests
 
@@ -20,7 +35,7 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice.
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
 ## Further help
 

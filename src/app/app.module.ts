@@ -1,47 +1,41 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BodyComponent } from './body/body.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './home/home.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { LogoutComponent } from './logout/logout.component';
+import { DarkmodeComponent } from './darkmode/darkmode.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DarkModeService } from 'angular-dark-mode';
 import { RouterModule } from '@angular/router';
-
-import { HomeComponent } from './home';
-import { LoginComponent } from './login';
-import { RegisterComponent } from './register';
-import { DarkModeToggle } from './dark-mode-toggle.component';
-import { DarkModeService, DARK_MODE_OPTIONS } from 'angular-dark-mode';
-import { SidebarComponent } from './sidebar';
-import { BodyComponent } from './body';
-import { LogoutComponent } from './logout';
-
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
+    BodyComponent,
     LoginComponent,
     RegisterComponent,
-    DarkModeToggle,
+    HomeComponent,
     SidebarComponent,
-    BodyComponent,
-    LogoutComponent
+    LogoutComponent,
+    DarkmodeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
     RouterModule,
-    RouterModule.forRoot([]),
+    RouterModule.forRoot([])
   ],
   providers: [
     DarkModeService,
-    DarkModeToggle
+    DarkmodeComponent
   ],
   bootstrap: [AppComponent]
 })

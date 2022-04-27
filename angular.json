@@ -1,12 +1,9 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "cli": {
-    "analytics": false
-  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "SafetyWeb": {
+    "notion-griff": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -20,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/SafetyWeb",
+            "outputPath": "dist/notion-griff",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -30,11 +27,12 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/font-awesome/css/font-awesome.css",
               "src/styles.css"
             ],
-            "scripts": ["./node_modules/angular-dark-mode/angular-dark-mode.js"]
+            "scripts": [
+              "./node_modules/angular-dark-mode/angular-dark-mode.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -73,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "SafetyWeb:build:production"
+              "browserTarget": "notion-griff:build:production"
             },
             "development": {
-              "browserTarget": "SafetyWeb:build:development"
+              "browserTarget": "notion-griff:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "SafetyWeb:build"
+            "browserTarget": "notion-griff:build"
           }
         },
         "test": {
@@ -107,5 +105,5 @@
       }
     }
   },
-  "defaultProject": "SafetyWeb"
+  "defaultProject": "notion-griff"
 }

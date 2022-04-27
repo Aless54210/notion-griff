@@ -3,30 +3,20 @@
         <div class="cardbody">
             <img src="../../assets/logo.png" width="400px">
             <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-                <!-- form register FirstName -->
+                <!-- form register Username -->
                 <div class="formelem">
-                    <label for="firstname">Firstname</label>
-                    <input type="text" formControlName="firstname" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" />
-                    <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
-                        <div *ngIf="f.firstname.errors.required">Firstname is required</div>
-                    </div>
-                </div>
-
-                <!-- form register LastName -->
-                <div class="formelem">
-                    <label for="lastname">Lastname</label>
-                    <input type="text" formControlName="lastname" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" />
-                    <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
-                        <div *ngIf="f.lastname.errors.required">Lastname is required</div>
+                    <label for="username">Username</label>
+                    <input type="text" formControlName="username" class="formcontrol"
+                        [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                        <div *ngIf="f.username.errors.required">Username is required</div>
                     </div>
                 </div>
 
                 <!-- form register email -->
                 <div class="formelem">
                     <label for="email">Email</label>
-                    <input type="text" formControlName="email" class="form-control"
+                    <input type="text" formControlName="email" class="formcontrol"
                         [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
                     <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                         <div *ngIf="f.email.errors.required">Email is required</div>
@@ -36,7 +26,7 @@
                 <!-- form register Password -->
                 <div class="formelem">
                     <label for="password">Password</label>
-                    <input type="password" formControlName="password" class="form-control"
+                    <input type="password" formControlName="password" class="formcontrol"
                         [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                         <div *ngIf="f.password.errors.required">Password is required</div>
@@ -46,12 +36,12 @@
                 <!-- form register Confirm Password -->
                 <div class="formelem">
                     <label for="password">Confirm password</label>
-                    <input type="password" formControlName="password" class="form-control"
+                    <input type="password" formControlName="password" class="formcontrol"
                         [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                 </div>
 
                 <!-- redirect to login page -->
-                <a href="/login">Déjà inscrit ?</a>
+                <a href="/login">Already registered ?</a>
 
                 <!-- validate form -->
                 <button [disabled]="loading" class="btn btn-primary float-right">

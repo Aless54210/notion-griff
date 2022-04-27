@@ -1,17 +1,18 @@
 :root {
-  --primary-color: "#fff";
-  --primary-opp-color: "#333";
-  --secondary-color: "#dfe6e9";
-  --secondary-opp-color: "#2d3436";
-  --third-color: "#fff";
-  --third-opp-color: "#343a40";
-  --margin-sidebar: 5rem;
+    --primary-color: "#fff";
+    --primary-opp-color: "#333";
+    --secondary-color: "#dfe6e9";
+    --secondary-opp-color: "#2d3436";
+    --third-color: "#fff";
+    --third-opp-color: "#343a40";
+    --margin-sidebar: 5rem;
 }
 
 *,
 html,
 body {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
 }
