@@ -3,9 +3,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ElementRef } from '@angular/core';
 import { AuthenticationService } from '../_services';
+import { faMailBulk } from '@fortawesome/free-solid-svg-icons';
+import { faLock } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({ templateUrl: 'login.component.html', styleUrls: ['./login.component.css'] })
 export class LoginComponent implements OnInit {
+  faMailBulk = faMailBulk ;
+  faLock = faLock;
   loginForm: FormGroup;
   loading = false;
   submitted = false;

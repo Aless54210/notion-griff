@@ -1,38 +1,69 @@
-<div class="cardcontainer">
-    <div class="cardobj">
-        <div class="cardbody">
-            <img src="../../assets/logo.png">
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                <!-- form login email -->
-                <div class="formelem">
-                    <label for="email">Email</label>
-                    <input type="text" formControlName="email" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                        <div *ngIf="f.email.errors.required">Email is required</div>
-                    </div>
-                </div>
-
-                <!-- form login Password -->
-                <div class="formelem">
-                    <label for="password">Password</label>
-                    <input type="password" formControlName="password" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                        <div *ngIf="f.password.errors.required">Password is required</div>
-                    </div>
-                </div>
-
-                <!-- redirect to register page -->
-                <a href="/register">Don't have an account ?</a>
-
-                <!-- validate login form -->
-                <button [disabled]="loading" class="btn btn-primary float-right">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                    Login
-                </button>
-                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
-            </form>
+<div class="container">
+  <div class="forms-container">
+    <div class="login-signup">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <!-- form login email -->
+        <h2 class="title">Login</h2>
+        <div class="input-field">
+          <fa-icon [icon]="faMailBulk"></fa-icon>
+          <input
+            type="email"
+            placeholder="Email"
+            formControlName="email"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+          />
         </div>
+
+        <!-- form login Password -->
+        <div class="input-field">
+          <fa-icon [icon]="faLock"></fa-icon>
+          <input
+            type="password"
+            placeholder="Password"
+            formControlName="password"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+          />
+        </div>
+
+        <!-- redirect to register page -->
+        <a href="/register">Don't have an account ?</a>
+
+        <!-- validate login form -->
+        <button [disabled]="loading" class="btn solid">
+          <span
+            *ngIf="loading"
+            class="spinner-border spinner-border-sm mr-1"
+          ></span>
+          Login
+        </button>
+        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">
+          {{ error }}
+        </div>
+
+        <div class="error">
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">Email is required</div>
+          </div>
+
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+          </div>
+        </div>
+      </form>
     </div>
+  </div>
+
+  <div class="panels-container">
+    <div class="panel">
+      <div class="content">
+        <h1>NotionGriff</h1>
+        <p>
+          The Place Where You Can Work Together In A Group To Specify Any Tasks
+        </p>
+      </div>
+      <img src="./assets/log.svg" class="image" alt="login-image" />
+    </div>
+  </div>
 </div>

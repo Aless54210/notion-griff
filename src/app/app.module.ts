@@ -13,6 +13,7 @@ import { DarkmodeComponent } from './darkmode/darkmode.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DarkModeService } from 'angular-dark-mode';
 import { RouterModule } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { RouterModule } from '@angular/router';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    FontAwesomeModule,
     ReactiveFormsModule,
     RouterModule,
     RouterModule.forRoot([])
