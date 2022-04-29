@@ -35,6 +35,7 @@ app.use(cookieParser());
 app.use(express.static('dist/griff-notion', { extensions: ['html'] }));
 
 // api routes
+app.use("/api/notes", require("./api/routes/note.route"));
 app.use("/api/user", require("./api/routes/user.route"));
 app.use("/api", require("./api/routes/index.route"));
 
