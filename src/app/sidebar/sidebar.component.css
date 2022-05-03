@@ -69,11 +69,35 @@
     width: 16.5rem;
 }
 
-.sidenav .btn-darkmode {
+.sidenav .darkmode-container {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    margin: 2rem 0;
+}
+
+.sidenav .darkmode-container p {
+    position: absolute;
+    right: 1rem;
+    color: var(--primary-opp-color);
+    animation-name: fadeIn;
+    animation-duration: 1.3s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.sidenav .darkmode-container .btn-darkmode {
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: 5rem;
     padding-left: 1.438rem;
 }
 

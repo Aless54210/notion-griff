@@ -8,7 +8,10 @@
             <i class="fa fa-times" aria-hidden="true"></i>
         </button>
     </div>
-    <app-dark-mode-toggle class="btn-darkmode"></app-dark-mode-toggle>
+    <div class="darkmode-container">
+        <app-dark-mode-toggle class="btn-darkmode"></app-dark-mode-toggle>
+        <p *ngIf="collapsed">Dark mode</p>
+    </div>
     <ul class="sidenav-nav">
         <li class="sidenav-nav-item" *ngFor="let data of navData">
             <a class="sidenav-nav-link" [routerLink]="[data.routerLink]" routerLinkActive="active"

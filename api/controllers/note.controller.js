@@ -9,29 +9,29 @@ const Notes = db.notes;
 ** Verify the cookie accessToken and verify that it exist on database
 ** Return the user with this token
 */
-exports.checkUser = async (req, res) => {
+exports.checkUser = async (req,res) => {
     const head = req.get('Authorization')
     resData = {
         user: null,
         res: res
     }
-    if (!head) {
+    if(!head) {
         resData.res.status(401).json({
             message: "No 'Authorization' field in request header",
             success: false
         });
         return resData;
     }
-    const apiKey = head.replace('Bearer', '').trim();
-    let token = await Tokens.findOne({ where: { accessToken: apiKey } });
-    if (!token) {
+    const apiKey = head.replace('Bearer','').trim();
+    let token = await Tokens.findOne({where: {accessToken: apiKey}});
+    if(!token) {
         resData.res.status(401).json({
             message: "Bad token!",
             success: false
         });
         return resData;
     }
-    resData.user = await Users.findOne({ where: { tokensId: token.id } });
+    resData.user = await Users.findOne({where: {tokensId: token.id}});
     return resData;
 }
 /*
@@ -39,11 +39,11 @@ exports.checkUser = async (req, res) => {
 ** params body: title, description, assigneesId, priority
 ** response: success and/or message
 */
-exports.createNote = async (req, res) => {
-    const { user, resData } = await this.checkUser(req, res);
-    if (!user)
+exports.createNote = async (req,res) => {
+    const {user,resData} = await this.checkUser(req,res);
+    if(!user)
         return resData
-    if (!req.body.title || !req.body.description || !req.body.priority) {
+    if(!req.body.title || !req.body.description || !req.body.priority) {
         res.status(400).json({
             message: "Content can not be empty!",
             success: false
@@ -78,11 +78,11 @@ exports.createNote = async (req, res) => {
 ** params body: title, description, assigneesId, priority
 ** response: success and/or message
 */
-exports.updateNote = async (req, res) => {
-    const { user, resData } = await this.checkUser(req, res);
-    if (!user)
+exports.updateNote = async (req,res) => {
+    const {user,resData} = await this.checkUser(req,res);
+    if(!user)
         return resData;
-    if (!req.body.title && !req.body.description && !req.body.assigneesId && !req.body.priority) {
+    if(!req.body.title && !req.body.description && !req.body.assigneesId && !req.body.priority) {
         res.status(400).json({
             message: "Content can not be empty!",
             success: false
@@ -90,12 +90,12 @@ exports.updateNote = async (req, res) => {
         return res;
     }
     try {
-        const note = await Notes.findOne({ where: { title: req.body.email, userId: user.id } })
-        if (note) {
-            if (note.title != req.body.title) note.title = req.body.title;
-            if (note.description != req.body.description) note.description = req.body.description;
-            if (note.assigneesId != req.body.assigneesId) note.assigneesId = req.body.assigneesId;
-            if (note.priority != req.body.priority) note.priority = req.body.priority;
+        const note = await Notes.findOne({where: {id: req.body.id,userId: user.id}})
+        if(note) {
+            if(note.title != req.body.title) note.title = req.body.title;
+            if(note.description != req.body.description) note.description = req.body.description;
+            if(note.assigneesId != req.body.assigneesId) note.assigneesId = req.body.assigneesId;
+            if(note.priority != req.body.priority) note.priority = req.body.priority;
 
             await note.save();
             res.status(200).json({
@@ -107,7 +107,7 @@ exports.updateNote = async (req, res) => {
                 success: false
             });
         }
-    } catch (error) {
+    } catch(error) {
         console.error(error);
         res.status(503).json({
             message: "Server error",
@@ -120,7 +120,7 @@ exports.updateNote = async (req, res) => {
 /*
 ** Get Notes function
 */
-exports.getNotes = async (req, res) => {
+exports.getNotes = async (req,res) => {
     const notes = await Notes.findAll();
     res.status(200).json({
         data: notes,
@@ -133,16 +133,16 @@ exports.getNotes = async (req, res) => {
 ** params url: noteId
 ** response: note obj
 */
-exports.getNoteId = async (req, res) => {
-    if (!req.params['noteId']) {
+exports.getNoteId = async (req,res) => {
+    if(!req.params['noteId']) {
         res.status(400).json({
             message: "Content can not be empty!",
             success: false
         });
         return res;
     }
-    const note = await Notes.findOne({ where: { id: req.params['noteId'] } });
-    if (!note) {
+    const note = await Notes.findOne({where: {id: req.params['noteId']}});
+    if(!note) {
         res.status(401).json({
             message: "Note doesn't exist !",
             success: false
@@ -161,25 +161,25 @@ exports.getNoteId = async (req, res) => {
 ** params url: noteId
 ** response: success and/or message
 */
-exports.deleteNote = async (req, res) => {
-    const { user, resData } = await this.checkUser(req, res);
-    if (!user)
+exports.deleteNote = async (req,res) => {
+    const {user,resData} = await this.checkUser(req,res);
+    if(!user)
         return resData;
-    if (!req.params['noteId']) {
+    if(!req.params['noteId']) {
         res.status(400).json({
             message: "Content can not be empty!",
             success: false
         });
         return res;
     }
-    const note = await Notes.findOne({ where: { id: req.params['noteId'] } });
-    if (!note) {
+    const note = await Notes.findOne({where: {id: req.params['noteId']}});
+    if(!note) {
         res.status(401).json({
             message: "Note doesn't exist !",
             success: false
         });
     } else {
-        if (note.userId != user.id) {
+        if(note.userId != user.id) {
             res.status(401).json({
                 message: "You must be the note creator to remove !",
                 success: false
