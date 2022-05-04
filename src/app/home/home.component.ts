@@ -3,12 +3,14 @@ import { ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { DarkModeService } from 'angular-dark-mode';
 import { AuthenticationService } from '../_services';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   templateUrl: 'home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  faSearch =  faSearch;
   loading = false;
   // theme variable
   isDarkMode: Boolean;
