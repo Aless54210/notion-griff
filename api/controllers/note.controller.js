@@ -43,7 +43,7 @@ exports.createNote = async (req,res) => {
     const {user,resData} = await this.checkUser(req,res);
     if(!user)
         return resData
-    if(!req.body.title || !req.body.description || !req.body.priority) {
+    if(!req.body.title || !req.body.priority || !req.body.dueDate || !req.body.status) {
         res.status(400).json({
             message: "Content can not be empty!",
             success: false
@@ -56,21 +56,22 @@ exports.createNote = async (req,res) => {
         title: req.body.title,
         description: req.body.description,
         assigneesId: req.body.assigneesId,
-        priority: req.body.priority
+        priority: req.body.priority,
+        status: req.body.status,
+        dueDate: req.body.dueDate
     };
-    await Notes.create(note).then(async (objNote) => {
-        objNote.tokensId = await tokenController.createToken(objNote);
-        await objNote.save();
+    try {
+        await Notes.create(note);
         res.status(200).json({
             success: true
         });
-    }).catch(err => {
+    } catch(err) {
         res.status(500).json({
             message: err.message || "Some error occurred while creating the user.",
             success: false
         });
         return res;
-    });
+    }
     return res;
 };
 /*
@@ -82,7 +83,8 @@ exports.updateNote = async (req,res) => {
     const {user,resData} = await this.checkUser(req,res);
     if(!user)
         return resData;
-    if(!req.body.title && !req.body.description && !req.body.assigneesId && !req.body.priority) {
+    if(!req.body.title && !req.body.description && !req.body.assigneesId && !req.body.priority
+        && !req.body.status && !req.body.dueDate) {
         res.status(400).json({
             message: "Content can not be empty!",
             success: false
@@ -96,6 +98,8 @@ exports.updateNote = async (req,res) => {
             if(note.description != req.body.description) note.description = req.body.description;
             if(note.assigneesId != req.body.assigneesId) note.assigneesId = req.body.assigneesId;
             if(note.priority != req.body.priority) note.priority = req.body.priority;
+            if(note.status != req.body.status) note.status = req.body.status;
+            if(note.dueDate != req.body.dueDate) note.dueDate = req.body.dueDate;
 
             await note.save();
             res.status(200).json({

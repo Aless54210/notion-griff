@@ -1,20 +1,19 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BodyComponent } from './body/body.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { HomeComponent } from './home/home.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { LogoutComponent } from './logout/logout.component';
-import { DarkmodeComponent } from './darkmode/darkmode.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DarkModeService } from 'angular-dark-mode';
-import { RouterModule } from '@angular/router';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {BodyComponent} from './body/body.component';
+import {LoginComponent} from './login/login.component';
+import {RegisterComponent} from './register/register.component';
+import {HomeComponent} from './home/home.component';
+import {SidebarComponent} from './sidebar/sidebar.component';
+import {LogoutComponent} from './logout/logout.component';
+import {DarkmodeComponent} from './darkmode/darkmode.component';
+import {FormsModule,ReactiveFormsModule} from '@angular/forms';
+import {DarkModeService} from 'angular-dark-mode';
+import {RouterModule} from '@angular/router';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +23,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     HomeComponent,
     SidebarComponent,
     LogoutComponent,
-    DarkmodeComponent
+    DarkmodeComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,4 +40,4 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

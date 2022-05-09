@@ -1,4 +1,141 @@
-<h2 [ngClass]="['title', getClass()]">Bienvenue sur Safety !</h2>
-<div class="userscontainer">
-    {{authenticationService.user?.username}}
+<!--<div class="container">
+    <h2 [ngClass]="['title', getClass()]">Welcome !</h2>
+    <div class="userscontainer">
+        {{authenticationService.user?.username}}
+    </div>
+    <button class="creation_btn" (click)="changeModal()">New</button>
+    <div [ngClass]="['modal_container', getClassModal()]">
+        <div class="modal">
+            <div class="modal_close">
+                <fa-icon [icon]="faClose" (click)="changeModal()"></fa-icon>
+            </div>
+            <div class="modal_body">
+                <input type="text" class="modal_title" placeholder="Untitled"/>                
+                <div class="modal_group">
+                    <fa-icon class="modal_icon" [icon]="faPerson"></fa-icon>
+                    <label>Assignees</label>
+                    <input placeholder="Empty"/>
+                </div>
+                <div class="modal_group">
+                    <fa-icon class="modal_icon" [icon]="faListCheck"></fa-icon>
+                    <label>Status</label>
+                    <fieldset class="modal_fieldset">
+                        <input type="radio" value="To do" name="group_status"/>To do
+                        <input type="radio" value="In progress" name="group_status"/>In progress
+                        <input type="radio" value="Done" name="group_status"/>Done
+                    </fieldset>
+                </div>
+                <div class="modal_group">
+                    <fa-icon class="modal_icon" [icon]="faBarsProgress"></fa-icon>
+                    <label>Priority</label>
+                    <fieldset class="modal_fieldset">
+                        <input type="radio" value="Low" name="group_priority"/>Low
+                        <input type="radio" value="Medium" name="group_priority"/>Medium
+                        <input type="radio" value="High" name="group_priority"/>High
+                    </fieldset>
+                </div>
+                <div class="modal_group">
+                    <fa-icon class="modal_icon" [icon]="faCalendar"></fa-icon>
+                    <label>Due date</label>
+                    <input placeholder="Empty" type="datetime-local"/>
+                </div>
+                <div class="modal_group">
+                    <fa-icon class="modal_icon" [icon]="faMessage"></fa-icon>
+                    <label>Description</label>
+                    <input placeholder="Empty"/>
+                </div>
+                <button class="add_btn">Add note</button>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+<div class="container">
+    <header>
+        <h1 [ngClass]="['title', getClass()]">Welcome !</h1>
+        <div class="userscontainer">
+            <h2>{{ authenticationService.user?.username | uppercase }}</h2>
+        </div>
+    </header>
+    <main>
+        <div class="nav-header">
+            <div class="title">
+                <h1>Team Task</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search.." />
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </div>
+            <div class="new-button">
+                <button class="btn" (click)="changeModal()">NEW</button>
+            </div>
+            <div [ngClass]="['modal_container', getClassModal()]">
+                <div class="modal">
+                    <div class="modal_close">
+                        <fa-icon [icon]="faClose" (click)="changeModal()"></fa-icon>
+                    </div>
+                    <div class="modal_body">
+                        <input type="text" class="modal_title" placeholder="Untitled"/>                
+                        <div class="modal_group">
+                            <fa-icon class="modal_icon" [icon]="faPerson"></fa-icon>
+                            <label>Assignees</label>
+                            <input placeholder="Empty"/>
+                        </div>
+                        <div class="modal_group">
+                            <fa-icon class="modal_icon" [icon]="faListCheck"></fa-icon>
+                            <label>Status</label>
+                            <fieldset class="modal_fieldset">
+                                <input type="radio" value="To do" name="group_status"/>To do
+                                <input type="radio" value="In progress" name="group_status"/>In progress
+                                <input type="radio" value="Done" name="group_status"/>Done
+                            </fieldset>
+                        </div>
+                        <div class="modal_group">
+                            <fa-icon class="modal_icon" [icon]="faBarsProgress"></fa-icon>
+                            <label>Priority</label>
+                            <fieldset class="modal_fieldset">
+                                <input type="radio" value="Low" name="group_priority"/>Low
+                                <input type="radio" value="Medium" name="group_priority"/>Medium
+                                <input type="radio" value="High" name="group_priority"/>High
+                            </fieldset>
+                        </div>
+                        <div class="modal_group">
+                            <fa-icon class="modal_icon" [icon]="faCalendar"></fa-icon>
+                            <label>Due date</label>
+                            <input placeholder="Empty" type="datetime-local"/>
+                        </div>
+                        <div class="modal_group">
+                            <fa-icon class="modal_icon" [icon]="faMessage"></fa-icon>
+                            <label>Description</label>
+                            <input placeholder="Empty"/>
+                        </div>
+                        <button class="add_btn">Add note</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="data-container">
+            <table>
+            <tr>
+                <th>User ID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Assignee ID</th>
+                <th>Priority</th>
+                <th>Created At</th>
+                <th>Due Date</th>
+            </tr>
+            <!-- this is a test data -->
+            <tr>
+                <td>1</td>
+                <td>Task One</td>
+                <td>This is a test one</td>
+                <td>1</td>
+                <td>High</td>
+                <td>05/04/2022</td>
+                <td>15/04/2022</td>
+            </tr>
+            </table>
+        </div>
+    </main>
 </div>

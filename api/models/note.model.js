@@ -1,5 +1,5 @@
-module.exports = (sequelize, Sequelize) => {
-    const Notes = sequelize.define("Notes", {
+module.exports = (sequelize,Sequelize) => {
+    const Notes = sequelize.define("Notes",{
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
@@ -19,6 +19,12 @@ module.exports = (sequelize, Sequelize) => {
         },
         priority: {
             type: Sequelize.INTEGER
+        },
+        status: {
+            type: Sequelize.STRING
+        },
+        dueDate: {
+            type: Sequelize.DATE
         }
     });
     return Notes;
