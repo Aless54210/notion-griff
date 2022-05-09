@@ -3,7 +3,7 @@ import {ElementRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {DarkModeService} from 'angular-dark-mode';
 import {AuthenticationService} from '../_services';
-import {faClose,faCalendar,faUser,faListCheck,faBarsProgress,faMessage} from '@fortawesome/free-solid-svg-icons';
+import {faClose,faCalendar,faUser,faListCheck,faBarsProgress,faMessage,faSearch} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   templateUrl: 'home.component.html',
@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   faCalendar = faCalendar;
   faListCheck = faListCheck;
   faPerson = faUser;
+  faSearch = faSearch;
   loading = false;
   // theme variable
   isDarkMode: Boolean;
