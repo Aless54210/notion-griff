@@ -3,12 +3,29 @@ import {ElementRef} from '@angular/core';
 import {Router,ActivatedRoute} from '@angular/router';
 import {DarkModeService} from 'angular-dark-mode';
 import {AuthenticationService,NoteService} from '../_services';
+import {
+  faClose,
+  faCalendar,
+  faUser,
+  faListCheck,
+  faBarsProgress,
+  faMessage,
+  faSearch,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent implements OnInit {
+  faMessage = faMessage;
+  faBarsProgress = faBarsProgress;
+  faClose = faClose;
+  faCalendar = faCalendar;
+  faListCheck = faListCheck;
+  faPerson = faUser;
+  faSearch = faSearch;
+  loading = false;
   isDarkMode: boolean;
   note: any;
 
@@ -31,5 +48,11 @@ export class DetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  editNote(){
+  }
+
+  deleteNote(){
   }
 }
