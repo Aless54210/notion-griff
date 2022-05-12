@@ -8,7 +8,7 @@
                 <h1>Team Task</h1>
             </div>
             <div class="search-bar">
-                <input type="text" placeholder="Search.." />
+                <input type="text" placeholder="Search..." [(ngModel)]="searchText"/>
                 <i class="fa fa-search"></i>
             </div>
             <div class="new-button">
@@ -79,7 +79,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let note of notes" (click)="goToDetails(note)">
+                <tr *ngFor="let note of notes | searchfilter:searchText" (click)="goToDetails(note)">
                     <td>{{note.title.slice(0,25)}}<span *ngIf="note.title.length >= 23">...</span></td>
                     <td>
                         <span *ngFor="let username of note.assignee" class="assignee_username">

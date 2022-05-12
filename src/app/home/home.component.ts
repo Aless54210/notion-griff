@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
   isModalOpened = false;
   notes = []
   target: any;
+  searchText: string;
 
   constructor(
     private elementRef: ElementRef,

@@ -15,6 +15,7 @@ import {DarkModeService} from 'angular-dark-mode';
 import {RouterModule} from '@angular/router';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {DetailsComponent} from './details/details.component';
+import { SearchfilterPipe } from './searchfilter.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +27,7 @@ import {DetailsComponent} from './details/details.component';
     LogoutComponent,
     DarkmodeComponent,
     DetailsComponent,
+    SearchfilterPipe,
   ],
   imports: [
     BrowserModule,
