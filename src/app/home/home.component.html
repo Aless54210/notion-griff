@@ -1,9 +1,6 @@
 <div class="container">
     <header>
-        <h1 [ngClass]="['title', getClass()]">Welcome !</h1>
-        <div class="userscontainer">
-            <h2>{{ authenticationService.user?.username | uppercase }}</h2>
-        </div>
+        <h1 [ngClass]="['title', getClass()]">Welcome {{ authenticationService.user?.username}} !</h1>
     </header>
     <main>
         <div class="nav-header">
@@ -12,7 +9,7 @@
             </div>
             <div class="search-bar">
                 <input type="text" placeholder="Search.." />
-                <button type="submit"><i class="fa fa-search"></i></button>
+                <i class="fa fa-search"></i>
             </div>
             <div class="new-button">
                 <button class="btn" (click)="changeModal()">NEW</button>
@@ -23,67 +20,85 @@
                         <fa-icon [icon]="faClose" (click)="changeModal()"></fa-icon>
                     </div>
                     <div class="modal_body">
-                        <input type="text" class="modal_title" placeholder="Untitled"/>                
+                        <input type="text" class="modal_title" type="text" placeholder="Untitled" id="modalTitleInput" required/>                
                         <div class="modal_group">
                             <fa-icon class="modal_icon" [icon]="faPerson"></fa-icon>
                             <label>Assignees</label>
-                            <input placeholder="Empty"/>
+                            <input placeholder="Empty" id="modalAssigneesInput" type="text"/>
                         </div>
                         <div class="modal_group">
                             <fa-icon class="modal_icon" [icon]="faListCheck"></fa-icon>
                             <label>Status</label>
                             <fieldset class="modal_fieldset">
-                                <input type="radio" value="To do" name="group_status"/>To do
-                                <input type="radio" value="In progress" name="group_status"/>In progress
-                                <input type="radio" value="Done" name="group_status"/>Done
+                                <input type="radio" value="To do" name="group_status" checked (click)="_status='To do'"/>To do
+                                <input type="radio" value="In progress" name="group_status" (click)="_status='In progress'"/>In progress
+                                <input type="radio" value="Done" name="group_status" (click)="_status='Done'"/>Done
                             </fieldset>
                         </div>
                         <div class="modal_group">
                             <fa-icon class="modal_icon" [icon]="faBarsProgress"></fa-icon>
                             <label>Priority</label>
                             <fieldset class="modal_fieldset">
-                                <input type="radio" value="Low" name="group_priority"/>Low
-                                <input type="radio" value="Medium" name="group_priority"/>Medium
-                                <input type="radio" value="High" name="group_priority"/>High
+                                <input type="radio" value="Low" name="group_priority" checked (click)="_priority=1"/>Low
+                                <input type="radio" value="Medium" name="group_priority" (click)="_priority=2"/>Medium
+                                <input type="radio" value="High" name="group_priority" (click)="_priority=3"/>High
                             </fieldset>
                         </div>
                         <div class="modal_group">
                             <fa-icon class="modal_icon" [icon]="faCalendar"></fa-icon>
                             <label>Due date</label>
-                            <input placeholder="Empty" type="datetime-local"/>
+                            <input placeholder="Empty" type="datetime-local" [value]="_dueDate" (change)="target=$event.target"/>
                         </div>
                         <div class="modal_group">
                             <fa-icon class="modal_icon" [icon]="faMessage"></fa-icon>
                             <label>Description</label>
-                            <input placeholder="Empty"/>
+                            <input placeholder="Empty" id="modalDescInput" type="text"/>
                         </div>
-                        <button class="add_btn">Add note</button>
+                        <button class="add_btn" (click)="createNote()">Add note</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="data-container">
-            <table>
-            <tr>
-                <th>User ID</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Assignee ID</th>
-                <th>Priority</th>
-                <th>Created At</th>
-                <th>Due Date</th>
-            </tr>
-            <!-- this is a test data -->
-            <tr>
-                <td>1</td>
-                <td>Task One</td>
-                <td>This is a test one</td>
-                <td>1</td>
-                <td>High</td>
-                <td>05/04/2022</td>
-                <td>15/04/2022</td>
-            </tr>
-            </table>
-        </div>
+        <table class="content_table">
+            <colgroup>
+                <col span="1" style="width: 18%;">
+                <col span="1" style="width: 14%;">
+                <col span="1" style="width: 11%;">
+                <col span="1" style="width: 11%;">
+                <col span="1" style="width: 16%;">
+                <col span="1" style="width: 30%;">
+             </colgroup>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Assignee</th>
+                    <th>Status</th>
+                    <th>Priority</th>
+                    <th>Due date</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let note of notes" (click)="goToDetails(note)">
+                    <td>{{note.title.slice(0,25)}}<span *ngIf="note.title.length >= 23">...</span></td>
+                    <td>
+                        <span *ngFor="let username of note.assignee" class="assignee_username">
+                            {{username}}
+                        </span>
+                    </td>
+                    <td>{{note.status}}</td>
+                    <td>{{note.priority}}</td>
+                    <td>{{note.dueDate}}</td>
+                    <td>{{note.description.slice(0,45)}}<span *ngIf="note.title.length >= 43">...</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <!--<div class="masonry_container">
+            <div class="masonry_box" *ngFor="let a of notes">
+                <h2>{{a.title}}</h2>
+                <p>{{a.description}}</p>
+                <h3 *ngIf="a.dueDate">{{a.dueDate}}</h3>
+            </div>
+        </div>-->
     </main>
 </div>

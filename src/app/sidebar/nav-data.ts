@@ -10,16 +10,6 @@ export const navbarData = [
         label: 'Profil'
     },
     {
-        routerLink: '/appareil',
-        icon: 'fa fa-usb',
-        label: 'Appareils'
-    },
-    {
-        routerLink: '/contacts',
-        icon: 'fa fa-address-book',
-        label: 'Contacts'
-    },
-    {
         routerLink: '/logout',
         icon: 'fa fa-sign-out',
         label: 'Déconnexion'

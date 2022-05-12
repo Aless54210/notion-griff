@@ -14,6 +14,7 @@ import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import {DarkModeService} from 'angular-dark-mode';
 import {RouterModule} from '@angular/router';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {DetailsComponent} from './details/details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +25,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     SidebarComponent,
     LogoutComponent,
     DarkmodeComponent,
+    DetailsComponent,
   ],
   imports: [
     BrowserModule,

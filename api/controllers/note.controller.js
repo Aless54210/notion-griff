@@ -1,8 +1,8 @@
 const db = require("../models");
-const tokenController = require("./token.controller");
 const Users = db.users;
 const Tokens = db.tokens;
 const Notes = db.notes;
+const {Op} = require('sequelize');
 
 /* 
 ** Check user function
@@ -40,10 +40,11 @@ exports.checkUser = async (req,res) => {
 ** response: success and/or message
 */
 exports.createNote = async (req,res) => {
+    let _assigneeIds = '';
     const {user,resData} = await this.checkUser(req,res);
     if(!user)
         return resData
-    if(!req.body.title || !req.body.priority || !req.body.dueDate || !req.body.status) {
+    if(!req.body.title || !req.body.priority || !req.body.status) {
         res.status(400).json({
             message: "Content can not be empty!",
             success: false
@@ -51,14 +52,27 @@ exports.createNote = async (req,res) => {
         return res;
     }
 
+    if(req.body.assignees) {
+        const userArray = req.body.assignees.split(';');
+        if(userArray.length <= 0) return;
+        const assigneeIds = await Users.findAll({
+            attributes: ['id'],
+            where: {
+                [Op.or]: [{username: {[Op.in]: userArray}},{email: {[Op.in]: userArray}}]
+            },
+            raw: true
+        });
+        assigneeIds.map((elem) => {_assigneeIds += `${elem.id};`});
+    }
+
     const note = {
         userId: user.id,
         title: req.body.title,
         description: req.body.description,
-        assigneesId: req.body.assigneesId,
+        assigneesId: _assigneeIds,
         priority: req.body.priority,
         status: req.body.status,
-        dueDate: req.body.dueDate
+        dueDate: req.body.dueDate === "" ? null : req.body.dueDate
     };
     try {
         await Notes.create(note);
@@ -125,7 +139,22 @@ exports.updateNote = async (req,res) => {
 ** Get Notes function
 */
 exports.getNotes = async (req,res) => {
-    const notes = await Notes.findAll();
+    let _usernames = '';
+    const notes = await Notes.findAll({raw: true});
+    for(let i = 0;i < notes.length;i++) {
+        const assigneeIds = notes[i].assigneesId.split(";");
+        if(assigneeIds.length <= 0) return;
+        const usernameUsers = await Users.findAll({
+            attributes: ['username'],
+            where: {
+                id: {[Op.in]: assigneeIds}
+            },
+            raw: true
+        });
+        usernameUsers.map((elem) => {_usernames += `${elem.username};`});
+        notes[i].assigneesId = _usernames;
+        _usernames = '';
+    }
     res.status(200).json({
         data: notes,
         success: true

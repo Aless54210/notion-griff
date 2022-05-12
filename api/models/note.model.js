@@ -12,7 +12,7 @@ module.exports = (sequelize,Sequelize) => {
             type: Sequelize.STRING
         },
         description: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING(1500)
         },
         assigneesId: {
             type: Sequelize.STRING

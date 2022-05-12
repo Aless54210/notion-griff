@@ -1,12 +1,15 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject,Observable} from 'rxjs';
+import {DatePipe} from "@angular/common";
 
 interface NoteT {
     id: number;
     title: string;
     description: string;
-    assigneesId: Array<number>;
+    assignee: string[];
     priority: number;
+    status: string;
+    dueDate: string;
 };
 
 @Injectable({providedIn: 'root'})
@@ -18,18 +21,21 @@ export class NoteService {
     private clearArray = () => {while(this.notes.length > 0) this.notes.pop()}
 
     public async loadNotes() {
+        const datepipe = new DatePipe('en-US');
         const noteRes = await fetch(`http://localhost:8080/api/notes`,{});
         if(!noteRes.ok)
             return;
         const noteJson = await noteRes.json();
         this.clearArray();
-        noteJson.data.forEach((note: {id: number; title: any; description: any; assigneesId: string; priority: any;}) => {
+        noteJson.data.forEach(note => {
             this.notes.push({
                 id: note.id,
                 title: note.title,
                 description: note.description,
-                assigneesId: note.assigneesId.split(',').map(Number),
+                assignee: note.assigneesId.slice(0,-1).split(";"),
                 priority: note.priority,
+                status: note.status,
+                dueDate: datepipe.transform(note.dueDate,'dd-MM-YYYY HH:mm')
             } as NoteT);
         });
     }
@@ -41,6 +47,10 @@ export class NoteService {
         }).catch(err => {console.error(err.message)})
     }
 
+    public getNotes(): Array<NoteT> | null {
+        return this.notes;
+    }
+
     public getNote(noteId: number): NoteT | null {
         let res = null;
         this.notes.forEach(note => {
@@ -48,17 +58,6 @@ export class NoteService {
                 res = note;
         })
         return res;
-        //const noteRes = await fetch(`http://localhost:8080/api/notes/${noteId}`,{});
-        //if(!noteRes.ok)
-        //    return null;
-        //const noteJson = await noteRes.json();
-        //const objNote = {
-        //    title: noteJson.data.title,
-        //    description: noteJson.data.description,
-        //    assigneesId: noteJson.data.assigneesId.split(',').map(Number),
-        //    priority: noteJson.data.priority,
-        //} as NoteT;
-        //return objNote;
     }
 
     public async updateNote(updatedPost: NoteT) {
@@ -69,11 +68,22 @@ export class NoteService {
         }).catch(err => {console.error(err.message)})
     }
 
-    public async createNote(newNote: NoteT) {
+    public async createNote(title,desc,priority,status,dueDate,assignees) {
         await fetch(`http://localhost:8080/api/notes`,{
             method: 'POST',
-            headers: {"Authorization": `Bearer ${localStorage.getItem("accessToken")}`},
-            body: JSON.stringify(newNote)
+            headers: {"Authorization": `Bearer ${localStorage.getItem("accessToken")}`,"Content-type": "application/json"},
+            body: JSON.stringify({
+                title: title,
+                description: desc,
+                priority: priority,
+                status: status,
+                dueDate: dueDate,
+                assignees: assignees
+            })
         }).catch(err => {console.error(err.message)})
+    }
+
+    public getNoteById(noteId): NoteT | null {
+        return this.notes.filter(note => note.id == noteId)[0];
     }
 }

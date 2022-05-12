@@ -41,11 +41,12 @@
 .sidenav .logo-container .logo img {
     width: 100%;
     height: auto;
+    border-radius: 4px;
 }
 
 .sidenav .logo-container .logo-text {
     margin-left: 1.5rem;
-    font-size: 24px;
+    font-size: 1.3em;
     font-weight: 700;
     color: var(--secondary-opp-color);
 }
