@@ -2,7 +2,7 @@ import {Component,OnInit} from '@angular/core';
 import {Router,ActivatedRoute} from '@angular/router';
 import {FormBuilder,FormGroup,Validators} from '@angular/forms';
 import {ElementRef} from '@angular/core';
-import {environment} from "../../environment/environment";
+import {environment} from "../../environments/environment";
 import {AuthenticationService} from '../_services';
 import {faMailBulk} from '@fortawesome/free-solid-svg-icons';
 import {faPerson} from '@fortawesome/free-solid-svg-icons';

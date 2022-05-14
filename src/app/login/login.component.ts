@@ -5,7 +5,7 @@ import {ElementRef} from '@angular/core';
 import {AuthenticationService} from '../_services';
 import {faMailBulk} from '@fortawesome/free-solid-svg-icons';
 import {faLock} from '@fortawesome/free-solid-svg-icons';
-import {environment} from "../../environment/environment";
+import {environment} from "../../environments/environment";
 
 @Component({templateUrl: 'login.component.html',styleUrls: ['./login.component.css']})
 export class LoginComponent implements OnInit {
