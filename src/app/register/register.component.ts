@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ElementRef } from '@angular/core';
+import {Component,OnInit} from '@angular/core';
+import {Router,ActivatedRoute} from '@angular/router';
+import {FormBuilder,FormGroup,Validators} from '@angular/forms';
+import {ElementRef} from '@angular/core';
+import {environment} from "../../environment/environment";
+import {AuthenticationService} from '../_services';
+import {faMailBulk} from '@fortawesome/free-solid-svg-icons';
+import {faPerson} from '@fortawesome/free-solid-svg-icons';
+import {faLock} from '@fortawesome/free-solid-svg-icons';
 
-import { AuthenticationService } from '../_services';
-import { faMailBulk } from '@fortawesome/free-solid-svg-icons';
-import { faPerson} from '@fortawesome/free-solid-svg-icons';
-import { faLock } from '@fortawesome/free-solid-svg-icons';
 
-
-@Component({ templateUrl: './register.component.html', styleUrls: ['./register.component.css'] })
+@Component({templateUrl: './register.component.html',styleUrls: ['./register.component.css']})
 export class RegisterComponent implements OnInit {
   faPerson = faPerson;
   faMailBulk = faMailBulk;
@@ -26,33 +26,34 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService
   ) {
+    console.log(environment.URL_API);
   }
 
   async ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required],
-      username: ['', Validators.required]
+      email: ['',Validators.required],
+      password: ['',Validators.required],
+      username: ['',Validators.required]
     });
     await this.authenticationService.loadUser();
-    if (this.authenticationService.authenticated)
+    if(this.authenticationService.authenticated)
       this.router.navigate(['/']);
   }
 
   // convenience getter for easy access to form fields
-  get f() { return this.registerForm.controls; }
+  get f() {return this.registerForm.controls;}
 
   async onSubmit() {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.registerForm.invalid) {
+    if(this.registerForm.invalid) {
       return;
     }
 
     this.loading = true;
     // root to send id to Back-End
-    let res = await fetch("http://localhost:8080/api/user/register", {
+    let res = await fetch(`${environment.URL_API}/api/user/register`,{
       method: "POST",
       body: JSON.stringify({
         username: this.f.username.value,
@@ -66,11 +67,11 @@ export class RegisterComponent implements OnInit {
       .then(response => {
         return response.json();
       })
-      .catch(function (err) {
+      .catch(function(err) {
         console.error(err);
       })
 
-    if (res.success) {
+    if(res.success) {
       this.router.navigate(["/login"]);
     } else {
       this.error = res.message;

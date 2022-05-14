@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
-import { DarkModeService } from 'angular-dark-mode';
-import { AuthenticationService, NoteService } from '../_services';
+import {Component,Input,OnInit} from '@angular/core';
+import {ElementRef} from '@angular/core';
+import {Router} from '@angular/router';
+import {DarkModeService} from 'angular-dark-mode';
+import {AuthenticationService,NoteService} from '../_services';
 import {
   faClose,
   faCalendar,
@@ -50,20 +50,21 @@ export class HomeComponent implements OnInit {
     private noteService: NoteService
   ) {
     this.darkModeService.darkMode$.subscribe((x) => (this.isDarkMode = x));
-    if (!this.authenticationService.authenticated) router.navigate(['/login']);
+
   }
 
   ngOnInit() {
     this.loadAndGetNotes();
+    if(!this.authenticationService.authenticated) this.router.navigate(['/login']);
   }
 
   async loadAndGetNotes() {
     await this.noteService.loadNotes();
     this.notes = this.noteService.getNotes();
     this.notes.forEach((note) => {
-      if (note.assignee[0].length <= 0) note.assignee = [];
-      if (note.priority === 1) note.priority = 'Low';
-      else if (note.priority === 2) note.priority = 'Medium';
+      if(note.assignee[0].length <= 0) note.assignee = [];
+      if(note.priority === 1) note.priority = 'Low';
+      else if(note.priority === 2) note.priority = 'Medium';
       else note.priority = 'High';
     });
   }
@@ -81,31 +82,18 @@ export class HomeComponent implements OnInit {
   }
 
   createNote() {
-    this._title = (<HTMLInputElement>(
-      document.getElementById('modalTitleInput')
-    )).value;
-    this._description = (<HTMLInputElement>(
-      document.getElementById('modalDescInput')
-    )).value;
-    this._assignees = (<HTMLInputElement>(
-      document.getElementById('modalAssigneesInput')
-    )).value;
-    if (this.target) this._dueDate = this.target.value;
-    this.noteService.createNote(
-      this._title,
-      this._description,
-      this._priority,
-      this._status,
-      this._dueDate,
-      this._assignees
-    );
+    this._title = (<HTMLInputElement>(document.getElementById('modalTitleInput'))).value;
+    this._description = (<HTMLInputElement>(document.getElementById('modalDescInput'))).value;
+    this._assignees = (<HTMLInputElement>(document.getElementById('modalAssigneesInput'))).value;
+    if(this.target) this._dueDate = this.target.value;
+    this.noteService.createNote(this._title,this._description,this._priority,this._status,this._dueDate,this._assignees);
     this.changeModal();
     window.location.reload();
   }
 
   goToDetails(note) {
-    this.router.navigate(['/details'], {
-      queryParams: { noteId: `${note.id}` },
+    this.router.navigate(['/details'],{
+      queryParams: {noteId: `${note.id}`},
     });
   }
 }

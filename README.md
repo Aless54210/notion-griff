@@ -8,7 +8,7 @@ The frontend is on the url: http://localhost:8081
 
 - npm start
 
-The api call is made on the url: http://localhost:8080/api
+The api call is made on the url: ${environment.URL_API}
 
 The first time call backend will create the database with mysql with env params:
 DB_HOST

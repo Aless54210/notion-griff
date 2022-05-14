@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { AuthenticationService } from './_services';
-import { DarkModeService } from 'angular-dark-mode';
+import {Component} from '@angular/core';
+import {AuthenticationService} from './_services';
+import {DarkModeService} from 'angular-dark-mode';
 
 interface SideNavToggle {
   screenWidth: number;

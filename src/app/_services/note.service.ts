@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject,Observable} from 'rxjs';
 import {DatePipe} from "@angular/common";
+import {environment} from "../../environment/environment";
 
 interface NoteT {
     id: number;
@@ -22,7 +23,7 @@ export class NoteService {
 
     public async loadNotes() {
         const datepipe = new DatePipe('en-US');
-        const noteRes = await fetch(`http://localhost:8080/api/notes`,{});
+        const noteRes = await fetch(`${environment.URL_API}/api/notes`,{});
         if(!noteRes.ok)
             return;
         const noteJson = await noteRes.json();
@@ -41,7 +42,7 @@ export class NoteService {
     }
 
     public async deleteNote(noteId: number) {
-        await fetch(`http://localhost:8080/api/notes/${noteId}`,{
+        await fetch(`${environment.URL_API}/api/notes/${noteId}`,{
             method: 'DELETE',
             headers: {'Authorization': `Bearer ${localStorage.getItem("accessToken")}`}
         }).catch(err => {console.error(err.message)})
@@ -61,15 +62,23 @@ export class NoteService {
     }
 
     public async updateNote(updatedPost: NoteT) {
-        await fetch(`http://localhost:8080/api/notes`,{
-            method: 'PATCH',
-            headers: {'Authorization': `Bearer ${localStorage.getItem("accessToken")}`},
-            body: JSON.stringify(updatedPost)
+        await fetch(`${environment.URL_API}/api/notes`,{
+            method: 'PUT',
+            headers: {'Authorization': `Bearer ${localStorage.getItem("accessToken")}`,"Content-type": "application/json"},
+            body: JSON.stringify({
+                id: updatedPost.id,
+                title: updatedPost.title,
+                description: updatedPost.description,
+                priority: updatedPost.priority,
+                status: updatedPost.status,
+                dueDate: updatedPost.dueDate,
+                assignees: updatedPost.assignee
+            })
         }).catch(err => {console.error(err.message)})
     }
 
     public async createNote(title,desc,priority,status,dueDate,assignees) {
-        await fetch(`http://localhost:8080/api/notes`,{
+        await fetch(`${environment.URL_API}/api/notes`,{
             method: 'POST',
             headers: {"Authorization": `Bearer ${localStorage.getItem("accessToken")}`,"Content-type": "application/json"},
             body: JSON.stringify({

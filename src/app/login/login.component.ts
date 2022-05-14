@@ -5,7 +5,7 @@ import {ElementRef} from '@angular/core';
 import {AuthenticationService} from '../_services';
 import {faMailBulk} from '@fortawesome/free-solid-svg-icons';
 import {faLock} from '@fortawesome/free-solid-svg-icons';
-
+import {environment} from "../../environment/environment";
 
 @Component({templateUrl: 'login.component.html',styleUrls: ['./login.component.css']})
 export class LoginComponent implements OnInit {
@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
     // Load and active the spinner
     this.loading = true;
     // root to send ID of connection to check if ID in database
-    let res = await fetch("http://localhost:8080/api/user/login",{
+    let res = await fetch(`${environment.URL_API}/api/user/login`,{
       method: "POST",
       body: JSON.stringify({
         email: this.f.email.value,

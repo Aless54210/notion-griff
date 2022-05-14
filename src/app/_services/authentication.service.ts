@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject,Observable} from 'rxjs';
+import {environment} from "../../environment/environment";
 
 interface UserT {
     email: string;
@@ -9,27 +10,27 @@ interface UserT {
     refreshToken: string;
 };
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class AuthenticationService {
     user: UserT;
     authenticated = false;
 
-    constructor() { }
+    constructor() {}
 
     public async loadUser() {
-        const userRes = await fetch(`http://localhost:8080/api/user`, {
-            headers: { 'Authorization': `Bearer ${localStorage.getItem("accessToken")}` }
+        const userRes = await fetch(`${environment.URL_API}/api/user`,{
+            headers: {'Authorization': `Bearer ${localStorage.getItem("accessToken")}`}
         });
-        if (!userRes.ok)
+        if(!userRes.ok)
             return;
         const userJson = await userRes.json();
         this.user = userJson.data;
         this.authenticated = true;
     }
 
-    public login(accessToken: string, refreshToken: string) {
-        localStorage.setItem("accessToken", accessToken);
-        localStorage.setItem("refreshToken", refreshToken);
+    public login(accessToken: string,refreshToken: string) {
+        localStorage.setItem("accessToken",accessToken);
+        localStorage.setItem("refreshToken",refreshToken);
     }
 
     public logout() {

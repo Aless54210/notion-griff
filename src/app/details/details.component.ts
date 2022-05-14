@@ -28,6 +28,8 @@ export class DetailsComponent implements OnInit {
   loading = false;
   isDarkMode: boolean;
   note: any;
+  isEditMode: boolean = false;
+  target: any;
 
   constructor(
     private elementRef: ElementRef,
@@ -41,18 +43,33 @@ export class DetailsComponent implements OnInit {
     if(!this.authenticationService.authenticated)
       router.navigate(['/login']);
     this.noteService.loadNotes();
-    route.queryParams.subscribe(
-      params => this.note = this.noteService.getNoteById(params['noteId'])
-    );
-    console.log(this.note);
   }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(
+      params => this.note = this.noteService.getNoteById(params['noteId'])
+    );
   }
 
-  editNote(){
+  checkInputValues() {
+    this.note.title = (<HTMLInputElement>(document.getElementById('modalTitleInput'))).value;
+    this.note.description = (<HTMLInputElement>(document.getElementById('modalDescInput'))).value;
+    this.note.assignee = (<HTMLInputElement>(document.getElementById('modalAssigneesInput'))).value;
+    if(this.note.priority === 'Low') this.note.priority = 1;
+    else if(this.note.priority === 'Medium') this.note.priority = 2;
+    else this.note.priority = 3;
+    if(this.target) this.note.dueDate = this.target.value;
   }
 
-  deleteNote(){
+  updateNote() {
+    this.checkInputValues();
+    this.noteService.updateNote(this.note);
+    this.isEditMode = false;
+    window.location.reload();
+  }
+
+  deleteNote() {
+    this.noteService.deleteNote(this.note.id);
+    this.router.navigate(['/']);
   }
 }
